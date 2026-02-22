@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio — Joseph Amani Muhombo</title>
+  <meta name="description" content="Portfolio de Joseph Amani Muhombo — Développeur Web & Community Manager." />
+
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+</head>
+
+<body>
+  <!-- NAV (hamburger) -->
+  <nav class="main-nav" aria-label="Navigation principale">
+    <a class="brand" href="index.html">Joseph Amani</a>
+
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="navMenu" aria-label="Ouvrir le menu">
+      <span class="nav-toggle__bar"></span>
+      <span class="nav-toggle__bar"></span>
+      <span class="nav-toggle__bar"></span>
+    </button>
+
+    <div class="nav-menu" id="navMenu">
+      <ul class="nav-links">
+        <li><a href="index.html" aria-current="page">Accueil</a></li>
+        <li><a href="cv.html">CV</a></li>
+        <li><a href="projet.html">Projets</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero reveal" aria-label="Présentation">
+    <h1>Joseph Amani Muhombo</h1>
+    <p class="subtitle">Développeur Web & Community Manager</p>
+
+    <img src="images/Portfoliojosephamani.png" alt="Photo de Joseph Amani Muhombo" />
+
+    <p>Bienvenue sur mon portfolio. Je crée des sites web modernes, propres et efficaces.</p>
+
+    <div class="buttons" role="group" aria-label="Accès rapide">
+      <a href="cv.html" class="btn">Voir mon CV</a>
+      <a href="projet.html" class="btn">Voir mes projets</a>
+      <a href="contact.html" class="btn">Me contacter</a>
+    </div>
+  </header>
+
+  <main>
+    <!-- ABOUT -->
+    <section id="about" class="reveal">
+      <h2>À propos de moi</h2>
+      <p>
+        Je suis passionné par la création de sites web modernes, propres et efficaces.
+        J’apprends chaque jour et j’aime transformer des idées en projets concrets.
+      </p>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-item">
+        <h3>Téléphone</h3>
+        <p><a href="tel:+243993185831">+243 993 185 831</a></p>
+      </div>
+
+      <div class="footer-item">
+        <h3>Email</h3>
+        <p><a href="mailto:josephamanimuhombo@gmail.com">josephamanimuhombo@gmail.com</a></p>
+      </div>
+
+      <div class="footer-item">
+        <h3>Suivez-moi</h3>
+        <div class="social-icons" aria-label="Réseaux sociaux">
+          <a href="https://www.facebook.com/profile.php?id=100063931290735" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+            <i class="fab fa-facebook-f" aria-hidden="true"></i>
+          </a>
+          <a href="https://www.linkedin.com/in/joseph-amani-muhombo-7a7828267" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+            <i class="fab fa-linkedin-in" aria-hidden="true"></i>
+          </a>
+          <a href="https://wa.me/243993185831" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+            <i class="fab fa-whatsapp" aria-hidden="true"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <p class="footer-note">&copy; 2026 Joseph Amani Muhombo – Tous droits réservés.</p>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
