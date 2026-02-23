@@ -1,3 +1,4 @@
+corrige toi meme
 /* main.js — Joseph Amani Muhombo */
 
 document.documentElement.classList.add("js");
@@ -172,8 +173,7 @@ document.documentElement.classList.add("js");
   });
 
   // =========================
-  // Contact form (FormSubmit ultra-safe)
-  // -> AUCUN listener submit (zéro risque de casser le POST)
+  // Contact form (FormSubmit compatible)
   // =========================
   const form = $("#contactForm");
   const statusEl = $("#formStatus");
@@ -187,12 +187,21 @@ document.documentElement.classList.add("js");
 
   const validateEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
+  // Si on revient sur la page après _next (contact.html), on nettoie le draft
+  // (évite que l'ancien message reste sauvegardé)
+  try {
+    if (location.pathname.endsWith("contact.html")) {
+      // Nettoyage simple (pas intrusif)
+      // Tu peux commenter ces 2 lignes si tu veux garder le draft même après envoi
+      localStorage.removeItem(DRAFT_KEY);
+    }
+  } catch {}
+
   if (form && statusEl) {
     const nomEl = $("#nom", form);
     const emailEl = $("#email", form);
     const sujetEl = $("#sujet", form);
     const messageEl = $("#message", form);
-    const submitBtn = form.querySelector('button[type="submit"]');
 
     const loadDraft = () => {
       try {
@@ -218,6 +227,8 @@ document.documentElement.classList.add("js");
       } catch {}
     };
 
+    loadDraft();
+
     const liveCheck = () => {
       const nom = nomEl?.value?.trim() || "";
       const email = emailEl?.value?.trim() || "";
@@ -236,9 +247,6 @@ document.documentElement.classList.add("js");
       return true;
     };
 
-    loadDraft();
-    liveCheck();
-
     ["input", "change"].forEach((evt) => {
       form.addEventListener(evt, () => {
         saveDraft();
@@ -246,28 +254,29 @@ document.documentElement.classList.add("js");
       });
     });
 
-    // ✅ Validation + UX sur le clic du bouton (pas sur submit)
-    if (submitBtn) {
-      submitBtn.addEventListener("click", (e) => {
-        const ok = liveCheck();
-        if (!ok) {
-          e.preventDefault(); // bloque la soumission si invalide
-          return;
-        }
+    form.addEventListener("submit", (e) => {
+      const ok = liveCheck();
 
-        // si OK -> on ne bloque pas : le navigateur enverra le POST
+      // ❌ Si invalide → on bloque l’envoi
+      if (!ok) {
+        e.preventDefault();
+        return;
+      }
+
+      // ✅ Si valide → on laisse FormSubmit envoyer réellement
+      const submitBtn = form.querySelector('button[type="submit"]');
+      if (submitBtn) {
         submitBtn.disabled = true;
         submitBtn.style.opacity = "0.85";
-        setStatus("Envoi en cours... ⏳", "info");
-      });
-    }
-
-    // Nettoyage draft en revenant sur la page contact après envoi
-    // (si tu rediriges vers merci.html, tu peux supprimer ce bloc si tu veux)
-    try {
-      if (location.pathname.endsWith("merci.html")) {
-        localStorage.removeItem(DRAFT_KEY);
       }
-    } catch {}
+
+      setStatus("Envoi en cours... (vérifiez ensuite votre boîte mail) ⏳", "info");
+
+      // On garde le draft au cas où l'utilisateur revient en arrière,
+      // mais tu peux le supprimer ici si tu préfères :
+      // localStorage.removeItem(DRAFT_KEY);
+    });
+
+    liveCheck();
   }
 })();
